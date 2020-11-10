@@ -7,7 +7,7 @@ import {
   LIST_EVENT_FAIL,
 } from "../constants/EventConstants";
 
-const createEventReducer = (state = {}, actions) => {
+export const createEventReducer = (state = {}, actions) => {
   switch (actions.type) {
     case CREATE_EVENT_REQUEST:
       return { loading: true };
@@ -24,7 +24,7 @@ const createEventReducer = (state = {}, actions) => {
   }
 };
 
-const listEventReducer = (state = { events: [] }, action) => {
+export const listEventReducer = (state = { events: [] }, action) => {
   switch (action.type) {
     case LIST_EVENT_REQUEST:
       return { loading: true };

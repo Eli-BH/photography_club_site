@@ -8,7 +8,7 @@ const {
 } = require("../controllers/frontendController");
 
 //create event
-route.router("/createevent").post(createEvents);
+route.router("/create").post(createEvents);
 
 //view events
 route.router("/").get(viewAllEvents);
