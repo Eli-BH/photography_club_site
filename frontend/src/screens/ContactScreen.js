@@ -1,7 +1,7 @@
 import React from "react";
 
 const ContactScreen = () => {
-  return <div>Hello from the Contact Screen</div>;
+  return <div className="contact-container"></div>;
 };
 
 export default ContactScreen;
