@@ -38,5 +38,6 @@ router.route("/:id").delete(deleteUser).get(getUserById).put(updateUser);
 //@desc View all users
 //@route GET /api/users
 //@access Public
-router.route("/").get(viewAllUsers);
+router.route("/all").get(viewAllUsers);
+
 module.exports = router;
