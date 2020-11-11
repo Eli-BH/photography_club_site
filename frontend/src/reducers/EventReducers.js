@@ -7,15 +7,15 @@ import {
   LIST_EVENT_FAIL,
 } from "../constants/EventConstants";
 
-export const createEventReducer = (state = {}, actions) => {
-  switch (actions.type) {
+export const createEventReducer = (state = {}, action) => {
+  switch (action.type) {
     case CREATE_EVENT_REQUEST:
       return { loading: true };
     case CREATE_EVENT_SUCCESS:
       return {
         loading: false,
         success: true,
-        eventCreateResponse: actions.payload,
+        eventCreateResponse: action.payload,
       };
     case CREATE_EVENT_FAIL:
       return { loading: false, error: action.payload };

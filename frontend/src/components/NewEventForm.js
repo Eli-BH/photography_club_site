@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import DatePickerComponent from "./DatePickerComponent";
 
-const NewEventForm = () => {
+const NewEventForm = ({ setShow }) => {
   const [validated, setValidated] = useState(false);
   const [title, setTitle] = useState("");
   const [type, setType] = useState("");
@@ -15,15 +15,20 @@ const NewEventForm = () => {
       event.preventDefault();
       event.stopPropagation();
     }
-
     setValidated(true);
+    event.preventDefault();
+    console.log(title);
+    console.log(type);
+    console.log(description);
+    console.log(startDate);
+    // setShow(false);
   };
   return (
     <Form
       noValidate
       validated={validated}
       onSubmit={handleSubmit}
-      className="container"
+      className="container p-4"
     >
       <Form.Group>
         <Form.Label>Title:</Form.Label>
@@ -40,6 +45,7 @@ const NewEventForm = () => {
       {/*date picker component*/}
       <Form.Group>
         <Form.Label>{`Date: `}</Form.Label>
+        <p></p>
         <DatePickerComponent
           startDate={startDate}
           setStartDate={setStartDate}
@@ -77,6 +83,10 @@ const NewEventForm = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
+
+      <Button type="submit" variant="danger">
+        Submit
+      </Button>
     </Form>
   );
 };
