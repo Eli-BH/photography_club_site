@@ -3,12 +3,17 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 //imports from reducers
-import { createEventReducer, listEventReducer } from "./reducers/EventReducers";
+import {
+  createEventReducer,
+  listEventReducer,
+  deleteSingleEventReducer,
+} from "./reducers/EventReducers";
 
 //combine reducers
 const reducer = combineReducers({
   createEvent: createEventReducer, //createNewEvent action
   listEvents: listEventReducer, //listAllEvents actios
+  deleteSingleEvent: deleteSingleEventReducer,
 });
 
 //initial state

@@ -5,6 +5,9 @@ import {
   LIST_EVENTS_REQUEST,
   LIST_EVENTS_SUCCESS,
   LIST_EVENTS_FAIL,
+  DELETE_EVENT_REQUEST,
+  DELETE_EVENT_SUCCESS,
+  DELETE_EVENT_FAIL,
 } from "../constants/EventConstants";
 
 export const createEventReducer = (state = {}, action) => {
@@ -31,6 +34,23 @@ export const listEventReducer = (state = { events: [] }, action) => {
     case LIST_EVENTS_SUCCESS:
       return { loading: false, success: true, events: action.payload };
     case LIST_EVENTS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const deleteSingleEventReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DELETE_EVENT_REQUEST:
+      return { loading: true };
+    case DELETE_EVENT_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        deleteSuccessRes: action.payload,
+      };
+    case DELETE_EVENT_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

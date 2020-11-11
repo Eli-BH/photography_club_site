@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Alert, Spinner, Card } from "react-bootstrap";
+import { Alert, Spinner, Card, Button } from "react-bootstrap";
 
 import NewEventButton from "../components/NewEventButton";
-import { listAllEvents } from "../actions/eventActions";
+import { listAllEvents, deleteEvent } from "../actions/eventActions";
 import "../styles/activities.scss";
 
 const ActivitiesScreen = () => {
@@ -15,6 +15,11 @@ const ActivitiesScreen = () => {
   useEffect(() => {
     dispatch(listAllEvents());
   }, [dispatch]);
+
+  const handleDelete = (id) => {
+    dispatch(deleteEvent(id));
+    window.location.reload(false);
+  };
 
   return (
     <div className="activities-screen">
@@ -31,7 +36,17 @@ const ActivitiesScreen = () => {
             <div key={event._id} className="container my-2">
               <Card bg="smoke" text="light">
                 <Card.Header>
-                  <h3>{event.title}</h3>
+                  <h3>
+                    <span className="ml-auto">
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelete(event._id)}
+                      >
+                        X
+                      </Button>
+                    </span>{" "}
+                    {event.title}{" "}
+                  </h3>
                   <h6>{new Date(event.date).toLocaleString()}</h6>
                 </Card.Header>
 

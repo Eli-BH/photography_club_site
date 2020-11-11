@@ -49,7 +49,7 @@ const viewAllEvents = asyncHandler(async (req, res) => {
 //@route POST /api/events/edit
 //@auth Private/Admin
 const editEvent = asyncHandler(async (req, res) => {
-  const event = await Event.findById(req.params.id);
+  const event = await Event.findById(req.body.id);
 
   if (event) {
     event.title = req.body.name || event.title;
@@ -71,8 +71,24 @@ const editEvent = asyncHandler(async (req, res) => {
   }
 });
 
+//@desc Delete Event
+//@route Delete /api/events
+//@auth Private/admin
+const deleteEvent = asyncHandler(async (req, res) => {
+  const event = await Event.findById(req.params.id);
+
+  if (event) {
+    await event.remove();
+    res.status(200).json({ message: "Event Removed" });
+  } else {
+    res.status(404);
+    throw new Error("Event not found");
+  }
+});
+
 module.exports = {
   createEvent: createEvent,
   viewAllEvents: viewAllEvents,
   editEvent: editEvent,
+  deleteEvent: deleteEvent,
 };

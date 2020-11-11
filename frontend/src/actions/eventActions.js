@@ -5,6 +5,9 @@ import {
   LIST_EVENTS_REQUEST,
   LIST_EVENTS_SUCCESS,
   LIST_EVENTS_FAIL,
+  DELETE_EVENT_REQUEST,
+  DELETE_EVENT_SUCCESS,
+  DELETE_EVENT_FAIL,
 } from "../constants/EventConstants";
 import axios from "axios";
 
@@ -61,6 +64,32 @@ export const listAllEvents = () => async (dispatch) => {
     dispatch({
       type: LIST_EVENTS_FAIL,
       payload: error.message,
+    });
+  }
+};
+
+export const deleteEvent = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DELETE_EVENT_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+
+    const { data } = await axios.delete(`/api/events/delete/${id}`, config);
+
+    dispatch({
+      type: DELETE_EVENT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_EVENT_FAIL,
+      payload: error,
     });
   }
 };
