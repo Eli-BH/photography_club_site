@@ -1,0 +1,21 @@
+@import "reset";
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+.gallery-container {
+  margin-top: $navbar-reset + 4px;
+  color: white;
+  letter-spacing: 2px;
+
+  h2 {
+    font-family: "Abril Fatface", cursive;
+  }
+
+  .jumbotron-div {
+    background-color: #535c64;
+  }
+
+  @media screen and (max-width: 500px) {
+    h2 {
+      font-size: 1.5em;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import "reset";
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
+
+.contact-container {
+  margin-top: $navbar-reset * 2;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  font-family: "Roboto Slab", serif;
+
+  @media screen and (max-width: 500px) {
+    img {
+      width: 325px;
+    }
+  }
+  img {
+    transition: transform 0.5s;
+  }
+
+  img:hover {
+    transform: scale(0.95);
+  }
+}
