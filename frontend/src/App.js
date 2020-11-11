@@ -7,11 +7,14 @@ import ActivitiesScreen from "./screens/ActivitiesScreen";
 import GalleryScreen from "./screens/GalleryScreen";
 import MembersScreen from "./screens/MembersScreen";
 import ContactScreen from "./screens/ContactScreen";
+import NewEventForm from "./components/NewEventForm";
 
 const App = () => {
   return (
     <Router>
+      <NewEventForm />
       <NavBarComponent />
+
       <Switch>
         <Route path="/" exact component={HomeScreen} />
         <Route path="/activities" component={ActivitiesScreen} />
