@@ -2,9 +2,9 @@ import {
   CREATE_EVENT_FAIL,
   CREATE_EVENT_REQUEST,
   CREATE_EVENT_SUCCESS,
-  LIST_EVENT_REQUEST,
-  LIST_EVENT_SUCCESS,
-  LIST_EVENT_FAIL,
+  LIST_EVENTS_REQUEST,
+  LIST_EVENTS_SUCCESS,
+  LIST_EVENTS_FAIL,
 } from "../constants/EventConstants";
 
 export const createEventReducer = (state = {}, action) => {
@@ -26,11 +26,11 @@ export const createEventReducer = (state = {}, action) => {
 
 export const listEventReducer = (state = { events: [] }, action) => {
   switch (action.type) {
-    case LIST_EVENT_REQUEST:
+    case LIST_EVENTS_REQUEST:
       return { loading: true };
-    case LIST_EVENT_SUCCESS:
+    case LIST_EVENTS_SUCCESS:
       return { loading: false, success: true, events: action.payload };
-    case LIST_EVENT_FAIL:
+    case LIST_EVENTS_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

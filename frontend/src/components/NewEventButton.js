@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
 
 import NewEventForm from "./NewEventForm";
 

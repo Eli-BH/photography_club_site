@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button } from "react-bootstrap";
 import DatePickerComponent from "./DatePickerComponent";
+import { useSelector, useDispatch } from "react-redux";
+import { createNewEvent } from "../actions/eventActions";
 
 const NewEventForm = ({ setShow }) => {
   const [validated, setValidated] = useState(false);
@@ -8,6 +10,11 @@ const NewEventForm = ({ setShow }) => {
   const [type, setType] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState(new Date());
+  const dispatch = useDispatch();
+
+  //lift this and put it in the screen
+  const createEvent = useSelector((state) => state.createEvent);
+  const { loading, error, eventCreateResponse } = createEvent;
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
@@ -16,13 +23,11 @@ const NewEventForm = ({ setShow }) => {
       event.stopPropagation();
     }
     setValidated(true);
-    event.preventDefault();
-    console.log(title);
-    console.log(type);
-    console.log(description);
-    console.log(startDate);
+
+    dispatch(createNewEvent(title, startDate, type, description));
     // setShow(false);
   };
+
   return (
     <Form
       noValidate
@@ -65,6 +70,7 @@ const NewEventForm = ({ setShow }) => {
           feedback="You must select an event type."
           defaultValue={type.value}
         >
+          <option>---</option>
           <option value="meeting">Meeting</option>
           <option value="workshop">Workshop</option>
           <option value="outing">Outing</option>
