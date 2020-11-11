@@ -71,8 +71,8 @@ const editEvent = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports({
+module.exports = {
   createEvent: createEvent,
   viewAllEvents: viewAllEvents,
   editEvent: editEvent,
-});
+};

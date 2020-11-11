@@ -1,19 +1,19 @@
 const e = require("express");
 const express = require("express");
-const route = express.Router();
+const router = express.Router();
 const {
-  createEvents,
+  createEvent,
   viewAllEvents,
   editEvent,
-} = require("../controllers/frontendController");
+} = require("../controllers/eventController");
 
 //create event
-route.router("/create").post(createEvents);
+router.route("/create").post(createEvent);
 
 //view events
-route.router("/").get(viewAllEvents);
+router.route("/").get(viewAllEvents);
 
 //edit event
-route.router("/editevent").put(editEvent);
+router.route("/editevent").put(editEvent);
 
-module.exports = route;
+module.exports = router;
