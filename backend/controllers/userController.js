@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const generateToken = require("../utils/generateToken");
 
 //@desc Regiseter a user
 //@route POST /api/users/register
@@ -18,7 +19,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name,
     email,
-    passowrd,
+    password,
   });
 
   //user.token =
@@ -29,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      //token: generateToken(user._id)
+      token: generateToken(user._id),
     });
   } else {
     res.status(400);
@@ -46,7 +47,7 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   //matchPassword function from the user model
-  if (user) {
+  if (user && (await user.matchPassword(password))) {
     res.json({
       _id: user._id,
       name: user.name,
@@ -110,16 +111,17 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     const updatedUser = await user.save();
 
     res.json({
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      isAdmin: user.isAdmin,
-      instagram: user.instagram,
-      website: user.website,
-      location: user.location,
-      bio: user.bio,
-      position: user.position,
-      images: user.images,
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      instagram: updatedUser.instagram,
+      website: updatedUser.website,
+      location: updatedUser.location,
+      bio: updatedUser.bio,
+      position: updatedUser.position,
+      images: updatedUser.images,
+      token: generateToken(updateUser._id),
     });
   } else {
     res.status(400);
@@ -189,15 +191,6 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
-//@desc View all users
-//@route GET /api/users
-//@access Public
-const viewAllUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({});
-
-  res.status(200).json(users);
-});
-
 module.exports = {
   registerUser: registerUser,
   authUser: authUser,
@@ -207,5 +200,4 @@ module.exports = {
   deleteUser: deleteUser,
   getUserById: getUserById,
   updateUser: updateUser,
-  viewAllUsers: viewAllUsers,
 };
