@@ -5,7 +5,7 @@ import logo from "../assets/ExUiKHk - Imgur.png";
 const HomeScreen = () => {
   return (
     <div className="home-container">
-      <video src={video} autoPlay loop muted="true" />
+      <video src={video} autoPlay loop muted={true} />
       <img src={logo} alt="PAM logo" />
     </div>
   );

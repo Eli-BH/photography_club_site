@@ -12,6 +12,9 @@ const ActivitiesScreen = () => {
   const listEvents = useSelector((state) => state.listEvents);
   const { events, success, error, loading } = listEvents;
 
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
   useEffect(() => {
     dispatch(listAllEvents());
   }, [dispatch]);
@@ -23,7 +26,7 @@ const ActivitiesScreen = () => {
 
   return (
     <div className="activities-screen">
-      <NewEventButton />
+      {userInfo && userInfo.isAdmin ? <NewEventButton /> : null}
       <div>
         {error && (
           <Alert variant="danger">{`An error occured while fetching Events`}</Alert>

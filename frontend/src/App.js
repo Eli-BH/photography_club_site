@@ -8,6 +8,8 @@ import ActivitiesScreen from "./screens/ActivitiesScreen";
 import GalleryScreen from "./screens/GalleryScreen";
 import MembersScreen from "./screens/MembersScreen";
 import ContactScreen from "./screens/ContactScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import LoginScreen from "./screens/LoginScreen";
 
 const App = () => {
   return (
@@ -20,6 +22,8 @@ const App = () => {
         <Route path="/gallery" component={GalleryScreen} />
         <Route path="/members" component={MembersScreen} />
         <Route path="/contact" component={ContactScreen} />
+        <Route path="/register" component={RegisterScreen} />
+        <Route path="/login" component={LoginScreen} />
       </Switch>
     </Router>
   );
