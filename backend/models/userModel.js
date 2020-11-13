@@ -14,6 +14,7 @@ const photoSchema = mongoose.Schema(
 const userSchema = mongoose.Schema(
   {
     name: {
+      //x
       type: String,
       required: true,
       trim: true,
@@ -35,25 +36,28 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    instagram: {
-      type: String,
-    },
     website: {
+      //this includes instagram
       type: String,
     },
     location: {
+      //x
       type: String,
     },
     bio: {
+      //x
       type: String,
     },
     position: {
+      //x
       //photographer,
       //model,
       //photographer/model,
       type: String,
     },
-    images: [photoSchema],
+    profileImage: {
+      type: String,
+    },
   },
   {
     timestamps: true,

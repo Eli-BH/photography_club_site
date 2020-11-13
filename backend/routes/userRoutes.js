@@ -32,7 +32,7 @@ router
 
 //@route GET /api/users/allusers
 // @access Public
-router.route("/allusers").put(getUsers);
+router.route("/all").get(getUsers);
 
 // @route GET /api/users/:id @access Private
 //@route PUT /api/users/:id

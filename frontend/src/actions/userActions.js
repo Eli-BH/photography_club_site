@@ -10,6 +10,10 @@ import {
   USER_LIST_SUCCESS,
   USER_LIST_FAIL,
   USER_LIST_RESET,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_RESET,
 } from "../constants/userConstants";
 
 import axios from "axios";
@@ -88,10 +92,20 @@ export const userLogout = () => (dispatch) => {
   localStorage.removeItem("userInfo");
   dispatch({ type: USER_LOGOUT });
   dispatch({ type: USER_LIST_RESET });
+  dispatch({ type: USER_DETAILS_REQUEST });
 };
 
 export const listUsers = () => async (dispatch) => {
   try {
+    dispatch({
+      type: USER_LIST_REQUEST,
+    });
+
+    const { data } = await axios.get("/api/users/all");
+    dispatch({
+      type: USER_LIST_SUCCESS,
+      payload: data,
+    });
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,

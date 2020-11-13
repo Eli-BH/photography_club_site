@@ -7,7 +7,16 @@ const generateToken = require("../utils/generateToken");
 //@auth Public
 const registerUser = asyncHandler(async (req, res) => {
   //get the info from the request
-  const { name, email, password } = req.body;
+  const {
+    name,
+    email,
+    password,
+    website,
+    location,
+    bio,
+    position,
+    images,
+  } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -20,6 +29,11 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    website,
+    location,
+    bio,
+    position,
+    images,
   });
 
   //user.token =
@@ -53,7 +67,6 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      instagram: user.instagram,
       website: user.website,
       location: user.location,
       bio: user.bio,
@@ -80,7 +93,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
-      instagram: user.instagram,
       website: user.website,
       location: user.location,
       bio: user.bio,
@@ -115,7 +127,6 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
-      instagram: updatedUser.instagram,
       website: updatedUser.website,
       location: updatedUser.location,
       bio: updatedUser.bio,
@@ -130,7 +141,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 });
 
 //@desc GET all users
-//@route GET /api/users/allusers
+//@route GET /api/users/all
 //@access Public
 const getUsers = asyncHandler(async (req, res) => {
   //empty object means to get all users
