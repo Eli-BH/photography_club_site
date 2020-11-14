@@ -55,7 +55,7 @@ const userSchema = mongoose.Schema(
       //photographer/model,
       type: String,
     },
-    profileImage: {
+    image: {
       type: String,
     },
   },

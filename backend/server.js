@@ -1,6 +1,8 @@
 const express = require("express");
 const userRoutes = require("./routes/userRoutes");
 const eventRoutes = require("./routes/eventRoutes");
+const uploadRoutes = require("./routes/uploadRoutes");
+const path = require("path");
 const app = express();
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
@@ -14,7 +16,11 @@ connectDB();
 
 app.use("/api/users", userRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/upload", uploadRoutes);
 
+//static folder
+const folder = path.resolve();
+app.use("/uploads", express.static(path.join(folder, "/uploads")));
 app.get("/", (req, res) => {
   res.send("server running");
 });

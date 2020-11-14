@@ -11,6 +11,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    image,
     website,
     location,
     bio,
@@ -29,11 +30,11 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password,
+    image,
     website,
     location,
     bio,
     position,
-    images,
   });
 
   //user.token =
@@ -66,6 +67,7 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      image: user.image,
       isAdmin: user.isAdmin,
       website: user.website,
       location: user.location,
@@ -93,6 +95,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+      image: user.image,
       website: user.website,
       location: user.location,
       bio: user.bio,

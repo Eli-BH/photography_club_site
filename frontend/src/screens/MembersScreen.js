@@ -33,8 +33,8 @@ const MembersScreen = () => {
               <div key={index}>
                 <MemberCard
                   id={item._id}
+                  image={item.image}
                   name={item.name}
-                  location={item.location}
                   website={item.website}
                   bio={item.bio}
                   position={item.position}
