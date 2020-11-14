@@ -110,39 +110,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc Update user profile
-// @route PUT /api/users/profile
-// @access Private
-const updateUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
-
-  if (user) {
-    user.name = req.body.name || user.name;
-    user.email = req.body.email || user.email;
-    if (req.body.password) {
-      user.password = req.body.password;
-    }
-
-    const updatedUser = await user.save();
-
-    res.json({
-      _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      isAdmin: updatedUser.isAdmin,
-      website: updatedUser.website,
-      location: updatedUser.location,
-      bio: updatedUser.bio,
-      position: updatedUser.position,
-      images: updatedUser.images,
-      token: generateToken(updateUser._id),
-    });
-  } else {
-    res.status(400);
-    throw new Error("User not found");
-  }
-});
-
 //@desc GET all users
 //@route GET /api/users/all
 //@access Public
@@ -189,7 +156,12 @@ const updateUser = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.isAdmin = req.body.isAdmin;
+    user.isAdmin = req.body.isAdmin || user.isAdmin;
+    user.password = req.body.password || user.password;
+    user.website = req.body.website || user.website;
+    user.bio = req.body.bio || user.bio;
+    user.position = req.body.position || user.position;
+    user.image = req.body.image || user.image;
 
     const updatedUser = await user.save();
 
@@ -198,6 +170,10 @@ const updateUser = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       isAdmin: updatedUser.isAdmin,
+      website: updatedUser.website,
+      bio: updatedUser.bio,
+      position: updatedUser.position,
+      image: updatedUser.image,
     });
   } else {
     res.status(404);
@@ -209,7 +185,7 @@ module.exports = {
   registerUser: registerUser,
   authUser: authUser,
   getUserProfile: getUserProfile,
-  updateUserProfile: updateUserProfile,
+
   getUsers: getUsers,
   deleteUser: deleteUser,
   getUserById: getUserById,

@@ -7,7 +7,7 @@ const {
   registerUser,
   authUser,
   getUserProfile,
-  updateUserProfile,
+
   getUsers,
   deleteUser,
   getUserById,
@@ -25,10 +25,7 @@ router.route("/login").post(authUser);
 // @route GET /api/users/profile
 // @route PUT /api/users/profile
 // @access Private
-router
-  .route("/profile")
-  .put(protect, updateUserProfile)
-  .get(protect, getUserProfile);
+router.route("/profile").get(protect, getUserProfile);
 
 //@route GET /api/users/allusers
 // @access Public

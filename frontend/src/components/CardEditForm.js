@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Form, Button, Col, Row, Alert, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { register } from "../actions/userActions";
-import FormContainer from "../components/FormContainer";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Alert, Form, Button, Row, Col, Spinner } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
-const RegisterScreen = ({ history }) => {
+import { updateUser } from "../actions/userActions";
+import FormContainer from "./FormContainer";
+
+const CardEditForm = ({ history }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState(null);
+  const [id, setId] = useState("");
 
   const [website, setWebsite] = useState("");
   const [bio, setBio] = useState("");
@@ -22,14 +21,18 @@ const RegisterScreen = ({ history }) => {
 
   const dispatch = useDispatch();
 
-  const userRegister = useSelector((state) => state.userRegister);
-  const { loading, error, userInfo } = userRegister;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { loading, error, user } = userUpdate;
 
   useEffect(() => {
-    if (userInfo) {
-      history.push("/");
+    setId(userInfo._id);
+    if (user) {
+      history.push("/members");
     }
-  }, [history, userInfo]);
+  }, [userInfo, history, user]);
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
@@ -57,25 +60,20 @@ const RegisterScreen = ({ history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
-      setMessage("Password do not match");
-    } else {
-      dispatch(register(name, email, password, image, website, bio, position));
-    }
+    dispatch(
+      updateUser(id, name, email, password, image, website, bio, position)
+    );
   };
 
   return (
-    <div className="register-container">
-      <div className="register-form-container">
+    <div className="edit-container">
+      <div className="edit-form-container">
         <FormContainer>
-          <h1>Register</h1>
+          <h1>Edit</h1>
           {error && (
             <Alert variant="danger"> Please check your information</Alert>
           )}
           {loading && <Spinner />}
-          {message && (
-            <Alert variant="danger">Please check your information</Alert>
-          )}
 
           <Form onSubmit={submitHandler}>
             <Form.Group>
@@ -107,18 +105,6 @@ const RegisterScreen = ({ history }) => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Confirmed Password</Form.Label>
-              <Form.Control
-                autoComplete="new-password"
-                placeholder="Confirm password"
-                type="password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </Form.Group>
-
             <hr />
             <Form.Group>
               <Form.File
@@ -186,20 +172,13 @@ const RegisterScreen = ({ history }) => {
             </Form.Group>
 
             <Button type="submit" variant="primary">
-              Register
+              Submit Changes
             </Button>
           </Form>
-
-          <Row className="py-3">
-            <Col>
-              Have an Account?
-              <Link to="/login">Login</Link>
-            </Col>
-          </Row>
         </FormContainer>
       </div>
     </div>
   );
 };
 
-export default RegisterScreen;
+export default CardEditForm;

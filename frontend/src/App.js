@@ -10,6 +10,7 @@ import MembersScreen from "./screens/MembersScreen";
 import ContactScreen from "./screens/ContactScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
+import CardEditForm from "./components/CardEditForm";
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/contact" component={ContactScreen} />
         <Route path="/register" component={RegisterScreen} />
         <Route path="/login" component={LoginScreen} />
+        <Route path="/edit" component={CardEditForm} />
       </Switch>
     </Router>
   );

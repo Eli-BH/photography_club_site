@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { listUsers } from "../actions/userActions";
-import { Accordion, Spinner, Alert } from "react-bootstrap";
+import { Accordion, Spinner, Alert, Jumbotron } from "react-bootstrap";
 import MemberCard from "../components/MemberCard";
 
 import "../styles/members.scss";
@@ -24,6 +24,10 @@ const MembersScreen = () => {
 
   return (
     <div className="container members-container">
+      <Jumbotron className="members-jumbotron-div">
+        <h2 className="jumbotron-h2">P.A.M. Club Members</h2>
+        <p>Check out some of our members</p>
+      </Jumbotron>
       {loading ? <Spinner animation="border" /> : null}
       {error ? <Alert variant="danger">{error}</Alert> : null}
       <Accordion>

@@ -1,12 +1,12 @@
 @import "reset";
-@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 .gallery-container {
   margin-top: $navbar-reset + 4px;
   color: white;
   letter-spacing: 2px;
 
   h2 {
-    font-family: "Abril Fatface", cursive;
+    font-family: "Poppins", sans-serif;
   }
 
   .jumbotron-div {

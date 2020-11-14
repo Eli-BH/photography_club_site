@@ -1,9 +1,16 @@
 @import "reset";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 .members-container {
-  margin-top: $navbar-reset * 2;
+  margin-top: $navbar-reset + 4px;
 
   h3 {
     color: black;
+  }
+  .members-jumbotron-div {
+    letter-spacing: 3px;
+    background-color: #535c64;
+    font-family: "Poppins", sans-serif;
+    color: white;
   }
 }

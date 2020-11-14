@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Alert, Spinner, Card, Button } from "react-bootstrap";
+import { Alert, Spinner, Card, Button, Jumbotron } from "react-bootstrap";
 
 import NewEventButton from "../components/NewEventButton";
 import { listAllEvents, deleteEvent } from "../actions/eventActions";
@@ -25,7 +25,11 @@ const ActivitiesScreen = () => {
   };
 
   return (
-    <div className="activities-screen">
+    <div className="activities-screen container">
+      <Jumbotron className="activities-jumbotron-div">
+        <h2 className="jumbotron-h2">P.A.M. Club Events</h2>
+        <p>Here's what we've got going on this year!</p>
+      </Jumbotron>
       {userInfo && userInfo.isAdmin ? <NewEventButton /> : null}
       <div>
         {error && (

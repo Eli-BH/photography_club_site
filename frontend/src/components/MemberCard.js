@@ -1,4 +1,6 @@
 import React from "react";
+import { LinkContainer } from "react-router-bootstrap";
+
 import {
   Accordion,
   Media,
@@ -27,10 +29,12 @@ const MemberCard = ({
           <div style={{ display: "flex", alignItems: "center" }}>
             <h3>{name}</h3>{" "}
             {user === id ? (
-              <Badge variant="secondary" className="ml-2">
-                {" "}
-                Edit Card
-              </Badge>
+              <LinkContainer to="/edit">
+                <Badge variant="secondary" className="ml-2">
+                  {" "}
+                  Edit Card
+                </Badge>
+              </LinkContainer>
             ) : null}
           </div>
         </Accordion.Toggle>

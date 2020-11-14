@@ -11,6 +11,9 @@ import {
   USER_LIST_FAIL,
   USER_LIST_RESET,
   USER_DETAILS_REQUEST,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAIL,
 } from "../constants/userConstants";
 
 import axios from "axios";
@@ -114,6 +117,45 @@ export const listUsers = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
+      payload: error.message,
+    });
+  }
+};
+
+export const updateUser = (
+  id,
+  name,
+  email,
+  password,
+  image,
+  website,
+  bio,
+  position
+) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_UPDATE_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.put(
+      `/api/users/${id}`,
+      { name, email, password, image, website, bio, position },
+      config
+    );
+
+    dispatch({
+      type: USER_UPDATE_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_FAIL,
       payload: error.message,
     });
   }
