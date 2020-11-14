@@ -45,13 +45,30 @@ const MemberCard = ({
             {" "}
             <Row className="align-items-center justify-content-center">
               <Col sm={12} lg={2}>
-                <Image height={150} width={120} alt={name} src={image} />
+                <Image
+                  height={150}
+                  width={120}
+                  alt={name}
+                  src={
+                    image ||
+                    "https://loremipsum.io/21-of-the-best-placeholder-image-generators/"
+                  }
+                />
               </Col>
               <Col>
                 <Media.Body>
                   <h5>{name}</h5>
                   <h6>{position}</h6>
-                  <h6>{website}</h6>
+                  <a
+                    href={website}
+                    style={{
+                      cursor: "pointer",
+                      color: "black",
+                      textDecoration: "none",
+                    }}
+                  >
+                    <h6>{website}</h6>
+                  </a>
 
                   <p>{bio}</p>
                 </Media.Body>
