@@ -21,9 +21,20 @@ app.use("/api/upload", uploadRoutes);
 //static folder
 const folder = path.resolve();
 app.use("/uploads", express.static(path.join(folder, "/uploads")));
-app.get("/", (req, res) => {
-  res.send("server running");
-});
+
+var __dirname = path.resolve();
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "/frontend/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("server running");
+  });
+}
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
